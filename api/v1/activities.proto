@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package api.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/Likebutter/todo-api/api_v1";
+
+service ActivitiesApi {
+    rpc Insert(Activity) returns (Activity) {}
+    rpc Get(GetActivityRequest) returns (Activity) {}
+    rpc List(ListActivitiesRequest) returns (Activities) {}
+}
+
+message Activity {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+    google.protobuf.Timestamp time = 4;
+}
+
+message Activities {
+    repeated Activity activities = 1;
+}
+
+message GetActivityRequest {
+    int32 id = 1;
+} 
+
+message ListActivitiesRequest {
+    int32 offset = 1;
+}
+
